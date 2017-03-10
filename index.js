@@ -5,8 +5,6 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var users = [];
 var userColor = [];
-var nickname;
-var color;
 var userCount = 0;
 
 
@@ -20,12 +18,10 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', function(socket){
 	
     // sets up a default nickname and color for the user when they first connect
-    nickname = "user " + ++userCount;
-    color = "black";
-	socket.nickname = nickname;
-	socket.color = color;
-    users.push(nickname);
-	userColor.push(color);
+    socket.nickname = "user " + ++userCount;
+    socket.color = "black";
+    users.push(socket.nickname);
+    userColor.push(socket.color);
 	
 	console.log('a user has connected');
 
@@ -42,7 +38,7 @@ io.on('connection', function(socket){
 			var colorPosition = users.indexOf(socket.nickname);
 			socket.color = msg.substring(11);
 			userColor[colorPosition] = socket.color;
-			io.emit('color-change', socket.color);
+		    io.emit('color-change', {nickname:socket.nickname, color: socket.color});
 		
 		} else if(msg.startsWith('/nick')) {
 			if(users.indexOf(msg.substring(6))  != -1) {

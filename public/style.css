@@ -7,8 +7,8 @@ table { width: 100%; height: 90%;}
 td { padding-bottom: 7px; }
 #messages { list-style-type: none; margin: 0; padding: 0; }
 #messages li { padding: 5px 10px; }
-#chatBox {width: 75%; height: 500px; vertical-align: bottom; position: relative; overflow: auto; background: grey; margin: 10px;}
-#userBox{width: 20%; height: 500px; vertical-align:bottom; position: relative; background: grey; margin: 10px;}
+#chatBox {width: 75%; height: 700px; vertical-align: bottom; position: relative; overflow: auto; background: grey; margin: 10px;}
+#userBox{width: 20%; height: 700px; vertical-align:bottom; position: relative; background: grey; margin: 10px;}
 #nickname {width: 65%; height: 20px; text-align: left; float: left; margin: 10px;}
 #usersOnline {width: 20%; height: 20px; text-align: left; float: right; margin: 10px;}
 #users{list-style-type:none; margin:0; padding: 0;}

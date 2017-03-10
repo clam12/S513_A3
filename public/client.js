@@ -28,8 +28,10 @@ $(function() {
 	});
 	
 	// confirms that the color has been changed
-	socket.on('color-change', function(color) {
-		chat = ('<span style="color: ' + color + '"> Your nickname color is now ' + color +'</span>');
+    socket.on('color-change', function(data) {
+	let nick = data.nickname;
+	let color = data.color;
+		chat = ('<span style="color: ' + color + '"> ' + nick + "'s nickname color is now " + color +'</span>');
 		$('#messages').append($('<li>').html(chat));
 	});
 	
