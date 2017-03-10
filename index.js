@@ -38,7 +38,13 @@ io.on('connection', function(socket){
 	
 	// sends message back to the client with extra info such as user nickname, timestamp, etc
     socket.on('chat', function(msg){
-		if(msg.startsWith('/nick')) {
+		if(msg.startsWith('/nickcolor')) {
+			var colorPosition = users.indexOf(socket.nickname);
+			socket.color = msg.substring(11);
+			userColor[colorPosition] = socket.color;
+			io.emit('color-change', socket.color);
+		
+		} else if(msg.startsWith('/nick')) {
 			if(users.indexOf(msg.substring(6))  != -1) {
 				socket.emit('nick-error', {error: 'nickname is taken'});
 			} else {
@@ -48,11 +54,6 @@ io.on('connection', function(socket){
 				socket.emit('nickname', socket.nickname);
 				io.emit('usernames', users);
 			}
-		} else if(msg.startsWith('nickcolor')) {
-			var colorPosition = users.indexOf(socket.nickname);
-			socket.color = "#" +  msg.substring(11, 17);
-			userColor[colorPosition] = socket.color;
-			io.emit('color-change', socket.color);
 		} else {
 			var time = new Date();
 			var messages = {nickname: socket.nickname, color: socket.color, msg: msg, timestamp: time.getHours() + ":" + time.getMinutes()};
@@ -70,12 +71,3 @@ io.on('connection', function(socket){
 		io.emit('usernames', users);
 	});
 });
-
-
-function changeNickname() {
-	
-}
-
-function changeColour() {
-	
-}

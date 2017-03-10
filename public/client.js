@@ -29,8 +29,8 @@ $(function() {
 	
 	// confirms that the color has been changed
 	socket.on('color-change', function(color) {
-		chat = ('<span style="color: ' + color + '> Your nickname color is now ' + color +'</span>');
-		$('#messages').append($('<li>').text(chat));
+		chat = ('<span style="color: ' + color + '"> Your nickname color is now ' + color +'</span>');
+		$('#messages').append($('<li>').html(chat));
 	});
 	
 	
@@ -40,11 +40,11 @@ $(function() {
 		let timeStamp = data.timestamp
 		let color = data.color;
 		let message = data.msg;
-		chat = ('[' + timeStamp + '] ' + nick + ': ' + message);
+		chat = ('[' + timeStamp + '] <span style="color: ' + color + '">' + nick + '</span>: ' + message);
 		if(nickname === nick)
-			$('#messages').append($('<li class="bold">').text(chat));
+			$('#messages').append($('<li class="bold">').html(chat));
 		else
-			$('#messages').append($('<li>').text(chat));
+			$('#messages').append($('<li>').html(chat));
     });
 	
 });
